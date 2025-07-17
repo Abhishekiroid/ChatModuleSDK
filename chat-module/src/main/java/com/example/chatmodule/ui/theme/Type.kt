@@ -193,4 +193,12 @@ object ChatTextStyles {
         lineHeight = 24.sp,
         letterSpacing = 0.sp,
     )
+
+    val messageMetadata = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.25.sp,
+    )
 } 

@@ -1,5 +1,6 @@
 package com.example.chatmodule.ui.xml
 
+import android.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -137,8 +138,8 @@ class MessagesAdapter(
                     binding.imageViewMessageImage.visibility = View.VISIBLE
                     binding.imageViewMessageImage.load(message.thumbnailUrl ?: message.fileUrl) {
                         crossfade(true)
-                        placeholder(android.R.drawable.ic_menu_gallery)
-                        error(android.R.drawable.ic_menu_close_clear_cancel)
+                        placeholder(R.drawable.ic_menu_gallery)
+                        error(R.drawable.ic_menu_close_clear_cancel)
                     }
                     
                     if (message.content.isNotEmpty() && message.content != "Image") {
@@ -167,6 +168,20 @@ class MessagesAdapter(
                 MessageType.SYSTEM -> {
                     binding.textViewMessageContent.visibility = View.VISIBLE
                     binding.textViewMessageContent.text = message.content
+                }
+
+                MessageType.VIDEO -> {
+                    binding.imageViewMessageImage.visibility = View.VISIBLE
+                    binding.imageViewMessageImage.load(message.thumbnailUrl ?: message.fileUrl) {
+                        crossfade(true)
+                        placeholder(R.drawable.ic_menu_gallery)
+                        error(R.drawable.ic_menu_close_clear_cancel)
+                    }
+
+                    if (message.content.isNotEmpty() && message.content != "Video") {
+                        binding.textViewMessageContent.visibility = View.VISIBLE
+                        binding.textViewMessageContent.text = message.content
+                    }
                 }
             }
         }

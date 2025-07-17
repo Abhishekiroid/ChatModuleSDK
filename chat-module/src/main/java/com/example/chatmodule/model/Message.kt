@@ -11,8 +11,9 @@ enum class MessageType(val value: Int) {
     TEXT(0),
     IMAGE(1),
     AUDIO(2),
-    FILE(3),
-    SYSTEM(4);
+    VIDEO(3),
+    FILE(4),
+    SYSTEM(5);
 
     companion object {
         fun fromInt(value: Int): MessageType = values().find { it.value == value } ?: TEXT
@@ -84,6 +85,7 @@ data class Message(
             MessageType.AUDIO -> "🎵 Audio message"
             MessageType.FILE -> "📎 ${fileName ?: "File"}"
             MessageType.SYSTEM -> content
+            MessageType.VIDEO -> "🎥 Video message"
         }
     }
     

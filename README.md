@@ -410,7 +410,7 @@ The module includes:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the IROID License - see the LICENSE file for details.
 
 ## 🆘 Support
 
@@ -419,13 +419,3 @@ For support and questions:
 - Check the documentation
 - Review the demo app for implementation examples
 
-## 🚧 Roadmap
-
-- [ ] Voice messages with recording
-- [ ] Video messages support
-- [ ] Message reactions
-- [ ] Message editing and deletion
-- [ ] Push notifications integration
-- [ ] End-to-end encryption
-- [ ] Custom message renderers
-- [ ] Advanced file preview 

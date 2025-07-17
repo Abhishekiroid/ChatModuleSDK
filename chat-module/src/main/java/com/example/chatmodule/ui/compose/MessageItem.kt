@@ -1,5 +1,6 @@
 package com.example.chatmodule.ui.compose
 
+import android.provider.MediaStore
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,6 +19,7 @@ import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -244,6 +246,13 @@ private fun MessageBubble(
                     color = textColor
                 )
             }
+
+            MessageType.VIDEO -> {
+                VideoMessageContent(
+                    message = message,
+                    textColor = textColor
+                )
+            }
         }
     }
 }
@@ -354,6 +363,82 @@ private fun AudioMessageContent(
 }
 
 /**
+ * Video message content component
+ */
+@Composable
+private fun VideoMessageContent(
+    message: Message,
+    textColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .widthIn(max = 240.dp)
+    ) {
+        // Video thumbnail with play button overlay
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(8.dp))
+        ) {
+            // Thumbnail
+            AsyncImage(
+                model = message.thumbnailUrl ?: message.fileUrl,
+                contentDescription = "Video thumbnail",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Black.copy(alpha = 0.1f)),
+                contentScale = ContentScale.Crop
+            )
+            
+            // Play button overlay
+            Box(
+                modifier = Modifier
+                    .size(48.dp)
+                    .clip(CircleShape)
+                    .background(Color.Black.copy(alpha = 0.5f))
+                    .align(Alignment.Center),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    imageVector = Icons.Default.PlayArrow,
+                    contentDescription = "Play video",
+                    tint = Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+            }
+        }
+
+        // Video duration and size info
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 4.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            // Duration
+            message.duration?.let { duration ->
+                Text(
+                    text = formatDuration(duration),
+                    style = ChatTextStyles.fileInfo,
+                    color = textColor.copy(alpha = 0.7f)
+                )
+            }
+            
+            // File size
+            message.fileSize?.let { size ->
+                Text(
+                    text = formatFileSize(size),
+                    style = ChatTextStyles.fileInfo,
+                    color = textColor.copy(alpha = 0.7f)
+                )
+            }
+        }
+    }
+}
+
+/**
  * Message status icon
  */
 @Composable
@@ -393,22 +478,22 @@ private fun formatMessageTime(timestamp: Long): String {
     return formatter.format(Date(timestamp))
 }
 
-private fun formatFileSize(bytes: Long): String {
-    val units = arrayOf("B", "KB", "MB", "GB")
-    var size = bytes.toDouble()
-    var unitIndex = 0
+private fun formatDuration(durationMs: Long): String {
+    val seconds = (durationMs / 1000) % 60
+    val minutes = (durationMs / (1000 * 60)) % 60
+    val hours = durationMs / (1000 * 60 * 60)
     
-    while (size >= 1024 && unitIndex < units.size - 1) {
-        size /= 1024
-        unitIndex++
+    return when {
+        hours > 0 -> String.format("%d:%02d:%02d", hours, minutes, seconds)
+        else -> String.format("%02d:%02d", minutes, seconds)
     }
-    
-    return "%.1f %s".format(size, units[unitIndex])
 }
 
-private fun formatDuration(milliseconds: Long): String {
-    val seconds = milliseconds / 1000
-    val minutes = seconds / 60
-    val remainingSeconds = seconds % 60
-    return "%d:%02d".format(minutes, remainingSeconds)
+private fun formatFileSize(bytes: Long): String {
+    return when {
+        bytes < 1024 -> "$bytes B"
+        bytes < 1024 * 1024 -> "${bytes / 1024} KB"
+        bytes < 1024 * 1024 * 1024 -> "${bytes / (1024 * 1024)} MB"
+        else -> "${bytes / (1024 * 1024 * 1024)} GB"
+    }
 } 

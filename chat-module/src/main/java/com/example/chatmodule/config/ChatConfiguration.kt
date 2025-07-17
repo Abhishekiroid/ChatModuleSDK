@@ -101,7 +101,9 @@ data class ChatConfiguration(
     val enableFileSharing: Boolean = true,
     val enableAudioMessages: Boolean = true,
     val enableImageMessages: Boolean = true,
+    val enableVideoMessages: Boolean = true,
     val maxFileSize: Long = 10 * 1024 * 1024, // 10MB
+    val maxVideoSize: Long = 50 * 1024 * 1024, // 50MB default for videos
     val connectionTimeout: Long = 10000,
     val reconnectionAttempts: Int = 5,
     val uiConfig: UiConfig = UiConfig(),
@@ -119,7 +121,9 @@ data class ChatConfiguration(
         private var enableFileSharing: Boolean = true
         private var enableAudioMessages: Boolean = true
         private var enableImageMessages: Boolean = true
+        private var enableVideoMessages: Boolean = true
         private var maxFileSize: Long = 10 * 1024 * 1024
+        private var maxVideoSize: Long = 50 * 1024 * 1024
         private var connectionTimeout: Long = 10000
         private var reconnectionAttempts: Int = 5
         private var uiConfig: UiConfig = UiConfig()
@@ -142,9 +146,22 @@ data class ChatConfiguration(
             this.maxFileSize = maxSize
         }
         
-        fun setMediaMessages(enableAudio: Boolean = true, enableImages: Boolean = true) = apply {
+        fun setMediaMessages(
+            enableAudio: Boolean = true,
+            enableImages: Boolean = true,
+            enableVideos: Boolean = true
+        ) = apply {
             this.enableAudioMessages = enableAudio
             this.enableImageMessages = enableImages
+            this.enableVideoMessages = enableVideos
+        }
+
+        fun setVideoConfig(
+            enabled: Boolean = true,
+            maxSize: Long = 50 * 1024 * 1024
+        ) = apply {
+            this.enableVideoMessages = enabled
+            this.maxVideoSize = maxSize
         }
         
         fun setConnectionSettings(timeout: Long = 10000, reconnectionAttempts: Int = 5) = apply {
@@ -206,7 +223,9 @@ data class ChatConfiguration(
                 enableFileSharing = enableFileSharing,
                 enableAudioMessages = enableAudioMessages,
                 enableImageMessages = enableImageMessages,
+                enableVideoMessages = enableVideoMessages,
                 maxFileSize = maxFileSize,
+                maxVideoSize = maxVideoSize,
                 connectionTimeout = connectionTimeout,
                 reconnectionAttempts = reconnectionAttempts,
                 uiConfig = uiConfig,

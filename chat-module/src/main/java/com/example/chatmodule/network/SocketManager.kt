@@ -23,31 +23,31 @@ class SocketManager(
     private val context: Context,
     private val configuration: ChatConfiguration
 ) {
-    
+
     companion object {
         private const val TAG = "SocketManager"
     }
-    
+
     private var socket: Socket? = null
     private var eventManager: EventManager? = null
-    
+
     private val _connectionState = MutableStateFlow(ConnectionState.DISCONNECTED)
     val connectionState: StateFlow<ConnectionState> = _connectionState.asStateFlow()
-    
+
     private val _isOnline = MutableStateFlow(isNetworkAvailable())
     val isOnline: StateFlow<Boolean> = _isOnline.asStateFlow()
-    
+
     /**
      * Initializes the socket connection
      */
     fun initialize(): EventManager {
         Log.d(TAG, "🔧 Initializing socket connection to: ${configuration.serverUrl}")
-        
+
         if (socket != null) {
             Log.d(TAG, "♻️ Disconnecting existing socket before reinitializing")
             disconnect()
         }
-        
+
         try {
             val options = IO.Options().apply {
                 transports = arrayOf(WebSocket.NAME, Polling.NAME)
@@ -55,46 +55,49 @@ class SocketManager(
                 reconnectionAttempts = 5
                 reconnectionDelay = 1000
                 timeout = 10000
-                
+
                 // Add authentication token if provided
                 configuration.authToken?.let { token ->
                     auth = mapOf("token" to token)
                     Log.d(TAG, "🔐 Authentication token added to socket options")
                 } ?: Log.d(TAG, "⚠️ No authentication token provided")
-                
+
                 // Apply socket options from configuration
                 timeout = configuration.connectionTimeout
                 reconnectionAttempts = configuration.reconnectionAttempts
                 Log.d(TAG, "⚙️ Applied socket timeout: ${configuration.connectionTimeout}")
-                Log.d(TAG, "⚙️ Applied reconnection attempts: ${configuration.reconnectionAttempts}")
+                Log.d(
+                    TAG,
+                    "⚙️ Applied reconnection attempts: ${configuration.reconnectionAttempts}"
+                )
             }
-            
+
             socket = IO.socket(configuration.serverUrl, options)
             eventManager = EventManager(socket!!)
-            
+
             setupDefaultListeners()
-            
+
             Log.d(TAG, "✅ Socket initialized successfully")
             return eventManager!!
-            
+
         } catch (e: URISyntaxException) {
             Log.e(TAG, "❌ Invalid socket URL: ${configuration.serverUrl}", e)
             throw IllegalArgumentException("Invalid socket URL: ${configuration.serverUrl}", e)
         }
     }
-    
+
     /**
      * Connects to the socket server
      */
     fun connect() {
         Log.d(TAG, "🔌 Attempting to connect to socket server")
-        
+
         if (!isNetworkAvailable()) {
             Log.w(TAG, "📵 No network available, cannot connect")
             _connectionState.value = ConnectionState.NO_NETWORK
             return
         }
-        
+
         socket?.let { socket ->
             if (!socket.connected()) {
                 Log.d(TAG, "🚀 Initiating socket connection...")
@@ -108,7 +111,7 @@ class SocketManager(
             throw IllegalStateException("Socket not initialized. Call initialize() first.")
         }
     }
-    
+
     /**
      * Disconnects from the socket server
      */
@@ -122,14 +125,14 @@ class SocketManager(
         }
         eventManager?.removeAllListeners()
     }
-    
+
     /**
      * Gets the current EventManager instance
      */
     fun getEventManager(): EventManager? {
         return eventManager
     }
-    
+
     /**
      * Checks if socket is currently connected
      */
@@ -138,14 +141,14 @@ class SocketManager(
         Log.d(TAG, "🔍 Socket connection status: $connected")
         return connected
     }
-    
+
     /**
      * Emits data to the server
      */
     fun emit(eventName: String, data: Any? = null) {
         Log.d(TAG, "📤 EMIT: $eventName")
         Log.d(TAG, "📤 EMIT Data: $data")
-        
+
         socket?.let { socket ->
             if (socket.connected()) {
                 val authenticatedData = createAuthenticatedPayload(data)
@@ -158,16 +161,18 @@ class SocketManager(
                 if (configuration.enableOfflineMessages) {
                     Log.d(TAG, "📥 Queuing offline message: $eventName")
                     queueOfflineMessage(eventName, data)
+                } else {
+
                 }
             }
         } ?: Log.e(TAG, "❌ Socket is null, cannot emit '$eventName'")
     }
-    
+
     /**
      * Creates an authenticated payload with token if available
      */
     private fun createAuthenticatedPayload(data: Any?): Any {
-        configuration.authToken?.let { token ->
+        configuration.authToken.let { token ->
             Log.d(TAG, "🔐 Adding authentication token to payload")
             return when (data) {
                 is JSONObject -> {
@@ -175,10 +180,12 @@ class SocketManager(
                     Log.d(TAG, "🔐 Token added to JSONObject")
                     data
                 }
-                null -> JSONObject().apply { 
+
+                null -> JSONObject().apply {
                     put("token", token)
                     Log.d(TAG, "🔐 Created new JSONObject with token")
                 }
+
                 else -> {
                     // Try to convert data to JSONObject and add token
                     try {
@@ -202,7 +209,7 @@ class SocketManager(
             return data ?: JSONObject()
         }
     }
-    
+
     /**
      * Updates network connectivity status
      */
@@ -210,9 +217,9 @@ class SocketManager(
         val wasOnline = _isOnline.value
         val nowOnline = isNetworkAvailable()
         _isOnline.value = nowOnline
-        
+
         Log.d(TAG, "📶 Network status: was $wasOnline, now $nowOnline")
-        
+
         if (!wasOnline && nowOnline) {
             Log.d(TAG, "📶 Network restored, attempting to reconnect")
             // Network came back, try to reconnect
@@ -225,20 +232,20 @@ class SocketManager(
             _connectionState.value = ConnectionState.NO_NETWORK
         }
     }
-    
+
     /**
      * Sets up default socket event listeners
      */
     private fun setupDefaultListeners() {
         Log.d(TAG, "🎧 Setting up default socket event listeners")
-        
+
         socket?.let { socket ->
             socket.on(Socket.EVENT_CONNECT) {
                 Log.d(TAG, "🎉 CONNECTED: Socket connected successfully")
                 _connectionState.value = ConnectionState.CONNECTED
                 sendPendingOfflineMessages()
             }
-            
+
             socket.on(Socket.EVENT_DISCONNECT) { args ->
                 val reason = if (args.isNotEmpty()) args[0].toString() else "unknown"
                 Log.d(TAG, "🔌 DISCONNECTED: Reason = $reason")
@@ -248,50 +255,51 @@ class SocketManager(
                     ConnectionState.RECONNECTING
                 }
             }
-            
+
             socket.on(Socket.EVENT_CONNECT_ERROR) { args ->
                 val error = if (args.isNotEmpty()) args[0] else "Connection error"
                 Log.e(TAG, "❌ CONNECTION ERROR: $error")
                 _connectionState.value = ConnectionState.ERROR
             }
-            
+
             socket.on("reconnect") {
                 Log.d(TAG, "🔄 RECONNECTED: Socket reconnected successfully")
                 _connectionState.value = ConnectionState.CONNECTED
                 sendPendingOfflineMessages()
             }
-            
+
             socket.on("reconnecting") {
                 Log.d(TAG, "🔄 RECONNECTING: Attempting to reconnect...")
                 _connectionState.value = ConnectionState.RECONNECTING
             }
-            
+
             socket.on("reconnect_error") {
                 Log.e(TAG, "❌ RECONNECT ERROR: Failed to reconnect")
                 _connectionState.value = ConnectionState.ERROR
             }
-            
+
             socket.on("reconnect_failed") {
                 Log.e(TAG, "💀 RECONNECT FAILED: All reconnection attempts failed")
                 _connectionState.value = ConnectionState.FAILED
             }
         }
-        
+
         Log.d(TAG, "✅ Default socket listeners configured")
     }
-    
+
     /**
      * Checks if network is available
      */
     private fun isNetworkAvailable(): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val connectivityManager =
+            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val network = connectivityManager.activeNetwork ?: return false
         val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-        
+
         return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) &&
                 capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
     }
-    
+
     /**
      * Queues a message for offline sending
      */
@@ -299,7 +307,7 @@ class SocketManager(
         // This would be implemented with the offline message queue system
         // For now, it's a placeholder
     }
-    
+
     /**
      * Sends any pending offline messages
      */

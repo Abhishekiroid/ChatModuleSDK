@@ -362,8 +362,20 @@ class MainActivity : ComponentActivity() {
                         chatRoomId = currentRoomId
                     )
                 }
+                mimeType.startsWith("video/") -> {
+                    // Get video metadata
+                    val duration = getVideoDuration(uri)
+                    val thumbnail = generateVideoThumbnail(uri)
+                    
+                    chatManager.sendVideoMessage(
+                        videoUrl = fileUrl,
+                        thumbnailUrl = thumbnail,
+                        duration = duration,
+                        fileSize = fileSize,
+                        chatRoomId = currentRoomId
+                    )
+                }
                 mimeType.startsWith("audio/") -> {
-                    // Get audio duration
                     val duration = getAudioDuration(uri)
                     chatManager.sendAudioMessage(
                         audioUrl = fileUrl,
@@ -383,7 +395,6 @@ class MainActivity : ComponentActivity() {
             }
         } catch (e: Exception) {
             Log.e("MainActivity", "Error handling file: ${e.message}", e)
-            // Show error to user
         }
     }
 
@@ -448,6 +459,36 @@ class MainActivity : ComponentActivity() {
         } catch (e: Exception) {
             Log.e("MainActivity", "Error getting audio duration: ${e.message}", e)
             return 0
+        } finally {
+            retriever.release()
+        }
+    }
+
+    private fun getVideoDuration(uri: Uri): Long {
+        val retriever = android.media.MediaMetadataRetriever()
+        try {
+            retriever.setDataSource(this, uri)
+            val durationStr = retriever.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION)
+            return durationStr?.toLongOrNull() ?: 0
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error getting video duration: ${e.message}", e)
+            return 0
+        } finally {
+            retriever.release()
+        }
+    }
+
+    private fun generateVideoThumbnail(uri: Uri): String? {
+        val retriever = android.media.MediaMetadataRetriever()
+        try {
+            retriever.setDataSource(this, uri)
+            val bitmap = retriever.getFrameAtTime(0)
+            // Convert bitmap to file/url and return the url
+            // This is a placeholder - implement your thumbnail storage logic
+            return null
+        } catch (e: Exception) {
+            Log.e("MainActivity", "Error generating video thumbnail: ${e.message}", e)
+            return null
         } finally {
             retriever.release()
         }

@@ -242,6 +242,41 @@ class ChatManager private constructor(
     }
     
     /**
+     * Sends a video message
+     */
+    fun sendVideoMessage(
+        videoUrl: String,
+        thumbnailUrl: String? = null,
+        duration: Long? = null,
+        fileSize: Long? = null,
+        chatRoomId: String
+    ) {
+        Log.d("ChatManager", "🎥 Sending video message to room: $chatRoomId")
+        Log.d("ChatManager", "🎥 Video URL: $videoUrl")
+        
+        if (!configuration.enableVideoMessages) {
+            Log.e("ChatManager", "❌ Video messages are disabled in configuration")
+            throw IllegalStateException("Video messages are disabled in configuration")
+        }
+        
+        val message = Message(
+            senderId = configuration.currentUserId,
+            senderName = configuration.currentUserName,
+            content = "Video",
+            receiverId = configuration.receiverId,
+            type = MessageType.VIDEO,
+            chatRoomId = chatRoomId,
+            fileUrl = videoUrl,
+            thumbnailUrl = thumbnailUrl,
+            duration = duration,
+            fileSize = fileSize,
+            mimeType = "video/*"
+        )
+        
+        sendMessage(message)
+    }
+    
+    /**
      * Creates a new chat room using configurable parameter names
      */
     fun createRoom(
