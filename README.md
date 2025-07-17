@@ -8,8 +8,6 @@ A comprehensive, flexible chat module for Android that supports both Jetpack Com
 - 🎨 **Dual UI Support** - Both Jetpack Compose and XML/Fragment implementations
 - 🌐 **Dynamic Event Handling** - Customize event names and add custom event listeners
 - 📱 **Rich Message Types** - Text, images, audio, and file messages
-- 🌙 **Theme Adaptability** - Automatic dark/light theme support with custom colors
-- 📴 **Offline Messaging** - Queue messages when offline and send when reconnected
 - 🔧 **Highly Configurable** - Enable/disable features as needed
 - 📊 **Message Status** - Sending, sent, delivered, read, and failed states
 - 🎯 **Custom Message Models** - Extend and customize message structure
