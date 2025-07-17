@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-land/material_clock_period_toggle_land.xml",
+        "source": "com.example.chatmodule.chat-module-material-1.12.0-44:/layout-land/material_clock_period_toggle_land.xml"
+    },
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-land/mtrl_picker_header_dialog.xml",
+        "source": "com.example.chatmodule.chat-module-material-1.12.0-44:/layout-land/mtrl_picker_header_dialog.xml"
+    },
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-land/material_timepicker.xml",
+        "source": "com.example.chatmodule.chat-module-material-1.12.0-44:/layout-land/material_timepicker.xml"
+    }
+]

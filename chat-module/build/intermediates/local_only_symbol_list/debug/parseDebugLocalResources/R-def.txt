@@ -1,0 +1,29 @@
+R_DEF: Internal format may change without notice
+local
+drawable ic_attach_file
+drawable ic_audio_file
+drawable ic_done_all
+drawable ic_send
+id buttonAttachment
+id cardViewMessageBubble
+id editTextMessage
+id fabSend
+id imageViewCurrentUserAvatar
+id imageViewFileIcon
+id imageViewMessageImage
+id imageViewMessageStatus
+id imageViewSenderAvatar
+id layoutAudioMessage
+id layoutEmptyState
+id layoutFileMessage
+id recyclerViewMessages
+id textInputLayoutMessage
+id textViewAudioDuration
+id textViewFileName
+id textViewFileSize
+id textViewMessageContent
+id textViewSenderName
+id textViewTimestamp
+id toolbar
+layout fragment_chat
+layout item_message

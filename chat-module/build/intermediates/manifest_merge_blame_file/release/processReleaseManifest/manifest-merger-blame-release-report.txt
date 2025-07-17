@@ -1,0 +1,35 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.chatmodule" >
+4
+5    <uses-sdk android:minSdkVersion="24" />
+6
+7    <!-- Internet permission for socket connections -->
+8    <uses-permission android:name="android.permission.INTERNET" />
+8-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:5:5-67
+8-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:5:22-64
+9
+10    <!-- Network state permission to check connectivity -->
+11    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+11-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:8:5-79
+11-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:8:22-76
+12
+13    <!-- Storage permissions for file attachments -->
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:11:5-80
+14-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:11:22-77
+15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+15-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:12:5-81
+15-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:12:22-78
+16
+17    <!-- Camera permission for photo messages -->
+18    <uses-permission android:name="android.permission.CAMERA" />
+18-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:15:5-65
+18-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:15:22-62
+19
+20    <!-- Microphone permission for audio messages -->
+21    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+21-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:18:5-71
+21-->/Users/imac/AndroidStudioProjects/ChatModuleSDK/chat-module/src/main/AndroidManifest.xml:18:22-68
+22
+23</manifest>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.9.2" type="incidents">
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/chatmodule/ui/compose/ChatScreen.kt"
+            line="70"
+            column="5"
+            startOffset="2983"
+            endLine="70"
+            endColumn="13"
+            endOffset="2991"/>
+    </incident>
+
+    <incident
+        id="ModifierParameter"
+        severity="warning"
+        message="Modifier parameter should be the first optional parameter">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*javaDir*0}/com/example/chatmodule/ui/compose/MessageItem.kt"
+            line="57"
+            column="5"
+            startOffset="2294"
+            endLine="57"
+            endColumn="13"
+            endOffset="2302"/>
+    </incident>
+
+    <incident
+        id="UseCompoundDrawables"
+        severity="warning"
+        message="This tag and its children can be replaced by one `&lt;TextView/>` and a compound drawable">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="174"
+            column="10"
+            startOffset="7869"
+            endLine="174"
+            endColumn="22"
+            endOffset="7881"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="73"
+            column="22"
+            startOffset="3036"
+            endLine="73"
+            endColumn="31"
+            endOffset="3045"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="92"
+            column="26"
+            startOffset="3950"
+            endLine="92"
+            endColumn="35"
+            endOffset="3959"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="135"
+            column="26"
+            startOffset="6113"
+            endLine="135"
+            endColumn="35"
+            endOffset="6122"/>
+    </incident>
+
+    <incident
+        id="ContentDescription"
+        severity="warning"
+        message="Missing `contentDescription` attribute on image">
+        <fix-alternatives>
+            <fix-attribute
+                description="Set contentDescription"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="contentDescription"
+                value="TODO"
+                point="4"
+                mark="0"/>
+            <fix-attribute
+                description="Set importantForAccessibility=&quot;no&quot;"
+                namespace="http://schemas.android.com/apk/res/android"
+                attribute="importantForAccessibility"
+                value="no"/>
+        </fix-alternatives>
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="191"
+            column="14"
+            startOffset="8578"
+            endLine="191"
+            endColumn="23"
+            endOffset="8587"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;No messages yet&quot;, should use `@string` resource">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_chat.xml"
+            line="53"
+            column="17"
+            startOffset="2056"
+            endLine="53"
+            endColumn="47"
+            endOffset="2086"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Start a conversation by sending a message&quot;, should use `@string` resource">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_chat.xml"
+            line="61"
+            column="17"
+            startOffset="2425"
+            endLine="61"
+            endColumn="73"
+            endOffset="2481"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Type a message...&quot;, should use `@string` resource">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_chat.xml"
+            line="106"
+            column="21"
+            startOffset="4487"
+            endLine="106"
+            endColumn="53"
+            endOffset="4519"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Send message&quot;, should use `@string` resource">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/fragment_chat.xml"
+            line="120"
+            column="17"
+            startOffset="5149"
+            endLine="120"
+            endColumn="58"
+            endOffset="5190"/>
+    </incident>
+
+    <incident
+        id="HardcodedText"
+        severity="warning"
+        message="Hardcoded string &quot;Audio message&quot;, should use `@string` resource">
+        <location
+            file="${:chat-module*debug*MAIN*sourceProvider*0*resDir*0}/layout/item_message.xml"
+            line="151"
+            column="33"
+            startOffset="6939"
+            endLine="151"
+            endColumn="61"
+            endOffset="6967"/>
+    </incident>
+
+</incidents>

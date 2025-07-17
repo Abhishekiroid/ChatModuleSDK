@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Internet permission for socket connections -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <!-- Network state permission to check connectivity -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    
+    <!-- Storage permissions for file attachments -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <!-- Camera permission for photo messages -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    
+    <!-- Microphone permission for audio messages -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+</manifest> 

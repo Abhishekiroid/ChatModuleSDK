@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-v21/notification_template_icon_group.xml",
+        "source": "com.example.chatmodule.chat-module-core-1.16.0-63:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-v21/notification_template_custom_big.xml",
+        "source": "com.example.chatmodule.chat-module-core-1.16.0-63:/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-v21/notification_action_tombstone.xml",
+        "source": "com.example.chatmodule.chat-module-core-1.16.0-63:/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "com.example.chatmodule.chat-module-release-72:/layout-v21/notification_action.xml",
+        "source": "com.example.chatmodule.chat-module-core-1.16.0-63:/layout-v21/notification_action.xml"
+    }
+]

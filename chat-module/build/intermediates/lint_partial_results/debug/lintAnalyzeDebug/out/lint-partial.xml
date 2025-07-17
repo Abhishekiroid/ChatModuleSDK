@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<incidents format="6" by="lint 8.9.2" type="partial_results">
+    <map id="UnusedResources">
+        <entry
+            name="model"
+            string="attr[colorOnSurface(R),colorPrimary(R),colorOnPrimary(R),actionBarSize(R),homeAsUpIndicator(R),textAppearanceLabelMedium(R),colorSurfaceVariant(R),textAppearanceBodyLarge(R),textAppearanceBodyMedium(R),textAppearanceLabelSmall(R)],drawable[ic_attach_file(U),ic_audio_file(U),ic_done_all(U),ic_send(U)],id[toolbar(U),recyclerViewMessages(U),layoutEmptyState(U),buttonAttachment(U),textInputLayoutMessage(D),editTextMessage(U),fabSend(U),imageViewSenderAvatar(U),textViewSenderName(U),cardViewMessageBubble(U),textViewMessageContent(U),imageViewMessageImage(U),layoutFileMessage(U),imageViewFileIcon(D),textViewFileName(U),textViewFileSize(U),layoutAudioMessage(U),textViewAudioDuration(U),textViewTimestamp(U),imageViewMessageStatus(U),imageViewCurrentUserAvatar(U)],layout[fragment_chat(U),item_message(U)],style[ThemeOverlay_MaterialComponents_ActionBar(R),Widget_MaterialComponents_Button_UnelevatedButton(R),Widget_MaterialComponents_TextInputLayout_OutlinedBox(R),ShapeAppearance_Material3_Corner_Full(R)],sample[avatars(R),backgrounds/scenic(R)];a^0,b^0,c^1,d^2,23^3^25^4^24^a^26^27^d,24^28^29^5^6^7^2a^a^8^9^b^c;;;"/>
+    </map>
+
+</incidents>
